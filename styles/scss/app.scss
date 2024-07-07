@@ -109,6 +109,62 @@ $todoAppTextColor: #616473;
       border-bottom: 1px solid rgb(31, 231, 57);
     }
   }
+
+  .form {
+    @include flex(column);
+    @include alignMainAndMinorAxis(center, center);
+    background-color: rgba(#000, 0.5);
+    // outline: dotted dodgerblue;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    .addingTask {
+      @include flex(column);
+      @include alignMainAndMinorAxis(center, flex-start);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-top: 3rem;
+      background-color: white;
+      width: 95%;
+      height: 35%;
+      label {
+        font-size: 2rem;
+      }
+      input[type="text"] {
+        margin: 1rem 0;
+        height: 5rem;
+        border-radius: 0.5rem;
+        border: 1px solid $backgroundColor;
+        width: 100%;
+        &:focus {
+          border: 1px solid;
+          border-image: linear-gradient(45deg, #02a2f7, #06d001) 45;
+
+          outline: none;
+        }
+      }
+      ::placeholder {
+        padding-left: 1rem;
+      }
+      .btn__save {
+        margin-top: 1rem;
+        border: none;
+        background-color: white;
+        color: #06d001;
+        letter-spacing: 0.1rem;
+        text-transform: uppercase;
+        border-radius: 0.2rem;
+        padding: 0.5rem;
+        align-self: flex-end;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
 .btn {
   img {
@@ -119,6 +175,7 @@ $todoAppTextColor: #616473;
   position: absolute;
   top: 95.5%;
   left: 44%;
+  z-index: 2;
   background-color: rgba($backgroundColor, 0);
   &.btn--active {
     transform: rotate(45deg);
@@ -126,6 +183,7 @@ $todoAppTextColor: #616473;
 }
 
 .todoApp__body {
+  // filter: blur(4px);
   .task__list {
     list-style: none;
     padding: 0;
@@ -144,8 +202,19 @@ $todoAppTextColor: #616473;
       @include setWidthAndHeightToElements(1.5rem, 1.5rem);
     }
   }
+
   .task-checked {
     text-decoration: line-through;
     font-family: map.get($primaryFonts, light);
   }
 }
+
+.hide {
+  visibility: hidden;
+}
+
+// .form input[type="text"]:focus {
+//   border: 1px solid;
+//   outline: none;
+//   transition: border 0.3s ease-in-out;
+// }

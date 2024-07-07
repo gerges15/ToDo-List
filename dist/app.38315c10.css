@@ -458,12 +458,70 @@ body {
 .todoApp .todoApp__footer .active {
   border-bottom: 1px solid rgb(31, 231, 57);
 }
+.todoApp .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.todoApp .form .addingTask {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: 3rem;
+  background-color: white;
+  width: 95%;
+  height: 35%;
+}
+.todoApp .form .addingTask label {
+  font-size: 2rem;
+}
+.todoApp .form .addingTask input[type=text] {
+  margin: 1rem 0;
+  height: 5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #f0efe9;
+  width: 100%;
+}
+.todoApp .form .addingTask input[type=text]:focus {
+  border: 1px solid;
+  border-image: linear-gradient(45deg, #02a2f7, #06d001) 45;
+  outline: none;
+}
+.todoApp .form .addingTask ::placeholder {
+  padding-left: 1rem;
+}
+.todoApp .form .addingTask .btn__save {
+  margin-top: 1rem;
+  border: none;
+  background-color: white;
+  color: #06d001;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  align-self: flex-end;
+}
+.todoApp .form .addingTask .btn__save:hover {
+  cursor: pointer;
+}
 
 .btn {
   border: none;
   position: absolute;
   top: 95.5%;
   left: 44%;
+  z-index: 2;
   background-color: rgba(240, 239, 233, 0);
 }
 .btn img {
@@ -496,6 +554,10 @@ body {
 .todoApp__body .task-checked {
   text-decoration: line-through;
   font-family: "open_sanslight";
+}
+
+.hide {
+  visibility: hidden;
 }
 
 /*# sourceMappingURL=/app.38315c10.css.map */
