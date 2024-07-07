@@ -398,6 +398,21 @@ body {
   height: 100vh;
 }
 
+.edit-btn, .todoApp .form .addingTask .btn__save {
+  margin-top: 1rem;
+  border: none;
+  background-color: white;
+  color: #06d001;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  align-self: flex-end;
+}
+.edit-btn:hover, .todoApp .form .addingTask .btn__save:hover {
+  cursor: pointer;
+}
+
 .todoApp {
   font-size: 1.5rem;
   width: 40rem;
@@ -458,6 +473,9 @@ body {
 .todoApp .todoApp__footer .active {
   border-bottom: 1px solid rgb(31, 231, 57);
 }
+.todoApp .todoApp__footer .task-tab:hover {
+  cursor: pointer;
+}
 .todoApp .form {
   display: flex;
   flex-direction: column;
@@ -501,21 +519,6 @@ body {
 .todoApp .form .addingTask ::placeholder {
   padding-left: 1rem;
 }
-.todoApp .form .addingTask .btn__save {
-  margin-top: 1rem;
-  border: none;
-  background-color: white;
-  color: #06d001;
-  letter-spacing: 0.1rem;
-  text-transform: uppercase;
-  border-radius: 0.2rem;
-  padding: 0.5rem;
-  align-self: flex-end;
-}
-.todoApp .form .addingTask .btn__save:hover {
-  cursor: pointer;
-}
-
 .btn {
   border: none;
   position: absolute;
@@ -527,6 +530,9 @@ body {
 .btn img {
   width: 50px;
   height: 50px;
+}
+.btn img:hover {
+  cursor: pointer;
 }
 .btn.btn--active {
   transform: rotate(45deg);
@@ -547,9 +553,12 @@ body {
   margin: 1rem 0;
 }
 .todoApp__body .task input[type=checkbox] {
-  accent-color: #9b59b6;
+  accent-color: #94ffd8;
   width: 1.5rem;
   height: 1.5rem;
+}
+.todoApp__body .task input[type=checkbox]:hover {
+  cursor: pointer;
 }
 .todoApp__body .task-checked {
   text-decoration: line-through;
@@ -558,6 +567,42 @@ body {
 
 .hide {
   visibility: hidden;
+}
+
+.task-finished img {
+  width: 28px;
+  height: 28px;
+}
+
+.task-edit img {
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  margin-left: 0.9rem;
+}
+.task-edit img:hover {
+  cursor: pointer;
+}
+
+.edit-btn {
+  margin: 0;
+  color: #0ebbda;
+}
+
+.task-edit.task-edit--active {
+  border: 1px solid #02a2f7;
+  border-radius: 1rem;
+}
+.task-edit input[type=text] {
+  padding: 0;
+  padding-left: 0.5rem;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  height: 100%;
+}
+.task-edit input[type=text]:focus {
+  outline: none;
 }
 
 /*# sourceMappingURL=/app.38315c10.css.map */

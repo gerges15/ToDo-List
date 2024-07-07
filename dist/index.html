@@ -23,25 +23,48 @@
         </div>
         <div class="todoApp__body">
           <ul class="task__list">
-            <div class="task task-1">
+            <div class="task" id="task-1">
               <li>Read an article</li>
               <input type="checkbox" name="task" value="1" id="task-1">
             </div>
-            <div class="task task-2 task-checked">
+
+            <div class="task task-checked" id="task-2">
               <li>Read an article</li>
-              <input type="checkbox" name="task" value="2" id="task-2">
+              <input checked="" type="checkbox" name="task" value="2" id="task-2">
+            </div>
+
+            <div class="task task-finished" id="task-3">
+              <li>Read an article</li>
+              <img src="/checked.66dc84c8.png" alt="">
+            </div>
+
+            <div class="task task-edit" id="task-3">
+              <li>Read an article</li>
+              <div class="modify">
+                <img id="delete" src="/delete.db1a2b6c.png" alt="">
+                <img id="edit" src="/edit.d186f88e.png" alt="">
+              </div>
+            </div>
+
+            <div class="task task-edit task-edit--active" id="task-3">
+              <li><input type="text"></li>
+              <div class="modify">
+                <button class="edit-btn">save</button>
+              </div>
             </div>
           </ul>
         </div>
+
         <button class="btn btn__create btn--active">
           <img src="/plus.be6c8e68.png" alt="new task">
         </button>
+
         <div class="todoApp__footer">
-          <p class="active">home</p>
-          <p>finished</p>
+          <p class="active task-tab">tasks</p>
+          <p class="task-tab">finished</p>
         </div>
 
-        <div class="form">
+        <div class="form hide">
           <div class="addingTask">
             <label for="addTask">Add Task</label> <br>
             <input type="text" placeholder="Add a task here" name="task" id="addTask">

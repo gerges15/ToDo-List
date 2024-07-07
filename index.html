@@ -23,25 +23,54 @@
         </div>
         <div class="todoApp__body">
           <ul class="task__list">
-            <div class="task task-1">
+            <div class="task" id="task-1">
               <li>Read an article</li>
               <input type="checkbox" name="task" value="1" id="task-1" />
             </div>
-            <div class="task task-2 task-checked">
+
+            <div class="task task-checked" id="task-2">
               <li>Read an article</li>
-              <input type="checkbox" name="task" value="2" id="task-2" />
+              <input
+                checked
+                type="checkbox"
+                name="task"
+                value="2"
+                id="task-2"
+              />
+            </div>
+
+            <div class="task task-finished" id="task-3">
+              <li>Read an article</li>
+              <img src="./assets/Icons/checked.png" alt="" />
+            </div>
+
+            <div class="task task-edit" id="task-3">
+              <li>Read an article</li>
+              <div class="modify">
+                <img id="delete" src="./assets/Icons/delete.png" alt="" />
+                <img id="edit" src="./assets/Icons/edit.png" alt="" />
+              </div>
+            </div>
+
+            <div class="task task-edit task-edit--active" id="task-3">
+              <li><input type="text" /></li>
+              <div class="modify">
+                <button class="edit-btn">save</button>
+              </div>
             </div>
           </ul>
         </div>
+
         <button class="btn btn__create btn--active">
           <img src="./assets/Icons/plus.png" alt="new task" />
         </button>
+
         <div class="todoApp__footer">
-          <p class="active">home</p>
-          <p>finished</p>
+          <p class="active task-tab">tasks</p>
+          <p class="task-tab">finished</p>
         </div>
 
-        <div class="form">
+        <div class="form hide">
           <div class="addingTask">
             <label for="addTask">Add Task</label> <br />
             <input

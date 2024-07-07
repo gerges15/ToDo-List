@@ -1,7 +1,11 @@
 @use "sass:map";
 @import url(/styles/CSS/normalize.css);
 @import url(/styles/fonts/open-sans/stylesheet.css);
-
+@mixin cursorHover($type) {
+  &:hover {
+    cursor: $type;
+  }
+}
 @mixin setWidthAndHeightToElements($width: auto, $height: auto) {
   width: $width;
   height: $height;
@@ -42,6 +46,21 @@ body {
   @include flex(column);
   @include alignMainAndMinorAxis(center, center);
   @include setWidthAndHeightToElements(auto, 100vh);
+}
+
+%btnSave {
+  margin-top: 1rem;
+  border: none;
+  background-color: white;
+  color: #06d001;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  align-self: flex-end;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 $containerWidth: 40rem;
@@ -108,8 +127,10 @@ $todoAppTextColor: #616473;
     .active {
       border-bottom: 1px solid rgb(31, 231, 57);
     }
+    .task-tab {
+      @include cursorHover(pointer);
+    }
   }
-
   .form {
     @include flex(column);
     @include alignMainAndMinorAxis(center, center);
@@ -142,7 +163,6 @@ $todoAppTextColor: #616473;
         &:focus {
           border: 1px solid;
           border-image: linear-gradient(45deg, #02a2f7, #06d001) 45;
-
           outline: none;
         }
       }
@@ -150,18 +170,7 @@ $todoAppTextColor: #616473;
         padding-left: 1rem;
       }
       .btn__save {
-        margin-top: 1rem;
-        border: none;
-        background-color: white;
-        color: #06d001;
-        letter-spacing: 0.1rem;
-        text-transform: uppercase;
-        border-radius: 0.2rem;
-        padding: 0.5rem;
-        align-self: flex-end;
-        &:hover {
-          cursor: pointer;
-        }
+        @extend %btnSave;
       }
     }
   }
@@ -170,6 +179,9 @@ $todoAppTextColor: #616473;
   img {
     width: 50px;
     height: 50px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   border: none;
   position: absolute;
@@ -198,8 +210,13 @@ $todoAppTextColor: #616473;
     padding: 1rem 0;
     margin: 1rem 0;
     input[type="checkbox"] {
-      accent-color: #9b59b6;
+      accent-color: #94ffd8;
+      // background-color: white;
       @include setWidthAndHeightToElements(1.5rem, 1.5rem);
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
@@ -212,9 +229,51 @@ $todoAppTextColor: #616473;
 .hide {
   visibility: hidden;
 }
+$iconSize: 28px;
+.task-finished {
+  img {
+    @include setWidthAndHeightToElements($iconSize, $iconSize);
+  }
+}
+
+.task-edit {
+  img {
+    @include setWidthAndHeightToElements($iconSize, $iconSize);
+    margin: 0 {
+      left: 0.9rem;
+    }
+    @include cursorHover(pointer);
+  }
+}
 
 // .form input[type="text"]:focus {
 //   border: 1px solid;
 //   outline: none;
 //   transition: border 0.3s ease-in-out;
 // }
+
+.edit-btn {
+  @extend %btnSave;
+  margin: 0;
+  color: #0ebbda;
+}
+
+.task-edit {
+  &.task-edit--active {
+    border: 1px solid #02a2f7;
+    border-radius: 1rem;
+  }
+  input[type="text"] {
+    padding: 0 {
+      left: 0.5rem;
+    }
+    outline: none;
+    border: none;
+    border-radius: 3px;
+
+    height: 100%;
+    &:focus {
+      outline: none;
+    }
+  }
+}
