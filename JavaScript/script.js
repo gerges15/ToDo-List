@@ -88,6 +88,7 @@ const toDoAppMonthAndYearContainer = document.querySelector(
   '.todoApp-month-year'
 );
 const month = document.querySelector('.month');
+console.log(month.textContent);
 const year = document.querySelector('.year');
 const toDoAppDayString = document.querySelector('.todoApp-day--string');
 const toDoAppBody = document.querySelector('.todoApp__body');
@@ -105,6 +106,7 @@ const completeTaskTab = document.querySelector('.finished-tab');
 class ToDoApp {
   #date = new Date();
   constructor() {
+    this._renderDate();
     this._addClickEventTargetAndCallBackFunction(
       btnCreate,
       this._activeBtnCreate.bind(this)
@@ -135,6 +137,17 @@ class ToDoApp {
       completeTaskTab,
       this._renderCompleteTaskGroup.bind(this)
     );
+  }
+
+  _renderDate() {
+    const [dayString, monthString, dayToDo, yearToDo] = this.#date
+      .toDateString()
+      .split(' ');
+
+    month.textContent = monthString;
+    year.textContent = yearToDo;
+    toDoAppDay.textContent = dayToDo;
+    toDoAppDayString.textContent = dayString;
   }
 
   _addClickEventTargetAndCallBackFunction(target, callBackFunction) {
