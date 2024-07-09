@@ -1,6 +1,6 @@
 class Task {
   #date = new Date();
-  #id = (Date.now() + "").slice(-10);
+  #id = (Date.now() + "").slice(-10) + Math.floor(Math.random() * 5) + 1;
   #taskContent;
   #taskState = "incomplete";
   constructor() {}
@@ -25,16 +25,33 @@ class Task {
     this.#taskState = taskState;
   }
 }
-const task1 = new Task();
-console.log(task1.getDate.toDateString());
-console.log(task1.getId);
-task1._setTaskContent = "complete todoApp today";
-console.log(task1.getTaskContent);
-console.log(task1.getTaskStateCompleteOrIncomplete);
 
-class IncompleteTask extends Task {}
+class IncompleteTask extends Task {
+  constructor() {
+    super();
+    this._setTaskStateCompleteOrIncomplete = "incomplete";
+  }
+}
 
-class CompleteTask extends Task {}
+const taskIncomplete = new IncompleteTask();
+const date = taskIncomplete.getDate;
+const id = taskIncomplete.getId;
+const state = taskIncomplete.getTaskStateCompleteOrIncomplete;
+console.log(date, id, state);
+
+class CompleteTask extends Task {
+  constructor() {
+    super();
+    this._setTaskStateCompleteOrIncomplete = "complete";
+  }
+}
+const taskComplete = new CompleteTask();
+const taskComplete2 = new CompleteTask();
+const dateComplete = taskComplete.getDate;
+const idComplete = taskComplete.getId;
+const idComplete2 = taskComplete2.getId;
+const stateComplete = taskComplete.getTaskStateCompleteOrIncomplete;
+console.log(dateComplete, idComplete, idComplete2, stateComplete);
 /////////////////////////////////
 const container = document.querySelector(".container");
 const toDoApp = document.querySelector(".todoApp");
