@@ -66,6 +66,7 @@ const btnSave = document.querySelector('.btn__save');
 const form = document.querySelector('.form');
 const inputField = document.querySelector('.input-field');
 
+const checkbox = document.querySelector('input[type = "checkbox"]');
 class ToDoApp {
   #date = new Date();
   constructor() {
@@ -85,6 +86,10 @@ class ToDoApp {
     this._addClickEventTargetAndCallBackFunction(
       btnSave,
       this._activeBtnCreate.bind(this)
+    );
+
+    this._addClickEventTargetAndCallBackFunction(taskGroup, () =>
+      console.log('checked')
     );
   }
 
