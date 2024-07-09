@@ -1,4 +1,9 @@
 'use strict';
+
+const taskDetails = {
+  task: { taskID: null, taskContent: null },
+};
+
 class Task {
   #date = new Date();
   #id = (Date.now() + '').slice(-10) + Math.floor(Math.random() * 5) + 1;
@@ -75,7 +80,7 @@ class ToDoApp {
 
     this._addClickEventTargetAndCallBackFunction(
       btnSave,
-      this._makeNewTask.bind(this)
+      this._makeIncompleteTask.bind(this)
     );
     this._addClickEventTargetAndCallBackFunction(
       btnSave,
@@ -95,17 +100,21 @@ class ToDoApp {
     form.classList.toggle('hide');
   }
 
-  _makeNewTask() {
-    const task = new IncompleteTask();
+  _makeIncompleteTask() {
+    const task = this._makeNewTask();
     if (this._isInputNull(inputField.value))
       return this._renderSelectedElementToggle(form);
     task._setTaskContent = inputField.value;
     this._renderSelectedElementToggle(form);
-    console.log(task.getTaskContent);
     this._clearInputFieldValue(inputField);
     this._renderTask(task, 'input');
+    taskDetails.task.taskID = task.getId;
+    taskDetails.task.taskContent = task.getTaskContent;
   }
 
+  _makeNewTask() {
+    return new IncompleteTask();
+  }
   _isInputNull(inputFieldValue) {
     return inputFieldValue === '' ? true : false;
   }
