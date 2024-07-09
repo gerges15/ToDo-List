@@ -70,7 +70,7 @@ class ToDoApp {
     );
     this._addClickEventTargetAndCallBackFunction(
       btnCreate,
-      this._renderSelectedElement.bind(this, form)
+      this._renderSelectedElementToggle.bind(this, form)
     );
 
     this._addClickEventTargetAndCallBackFunction(
@@ -97,12 +97,19 @@ class ToDoApp {
 
   _makeNewTask() {
     const task = new IncompleteTask();
+    if (this._isInputNull(inputField.value))
+      return this._renderSelectedElementToggle(form);
     task._setTaskContent = inputField.value;
-    this._renderSelectedElement(form);
+    this._renderSelectedElementToggle(form);
     console.log(task.getTaskContent);
     this._clearInputFieldValue(inputField);
   }
-  _renderSelectedElement(selector) {
+
+  _isInputNull(inputFieldValue) {
+    return inputFieldValue === "" ? true : false;
+  }
+
+  _renderSelectedElementToggle(selector) {
     selector.classList.toggle("hide");
   }
 
@@ -115,7 +122,7 @@ class ToDoApp {
   }
 
   _showSelectedModel(selector) {
-    selector.style.display = "block";
+    selector.style.display = "auto";
   }
 }
 
