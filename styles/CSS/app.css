@@ -96,10 +96,11 @@ body {
   top: 93%;
   text-transform: capitalize;
 }
-.todoApp .todoApp__footer .active {
+.todoApp .todoApp__footer .tab--active {
   border-bottom: 1px solid rgb(31, 231, 57);
 }
-.todoApp .todoApp__footer .task-tab:hover {
+.todoApp .todoApp__footer .task-tab:hover,
+.todoApp .todoApp__footer .finished-tab:hover {
   cursor: pointer;
 }
 .todoApp .form {

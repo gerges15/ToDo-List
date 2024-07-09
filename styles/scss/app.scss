@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 @import url(/styles/CSS/normalize.css);
 @import url(/styles/fonts/open-sans/stylesheet.css);
 @mixin cursorHover($type) {
@@ -31,15 +31,15 @@ html {
   // font-weight: bold;
 }
 $primaryFonts: (
-  "bold": "open_sansbold",
-  "regular": "open_sansregular",
-  "light": "open_sanslight",
+  'bold': 'open_sansbold',
+  'regular': 'open_sansregular',
+  'light': 'open_sanslight',
 );
 
 $backgroundColor: #f0efe9;
 body {
   background-color: $backgroundColor;
-  font-family: map.get($primaryFonts, "regular");
+  font-family: map.get($primaryFonts, 'regular');
 }
 
 .container {
@@ -101,7 +101,7 @@ $todoAppTextColor: #616473;
       }
     }
     .todoApp-day--number {
-      font-family: map.get($primaryFonts, "bold");
+      font-family: map.get($primaryFonts, 'bold');
       font-size: 5rem;
       margin: 0 {
         top: 2rem;
@@ -124,10 +124,11 @@ $todoAppTextColor: #616473;
     position: absolute;
     top: 93%;
     text-transform: capitalize;
-    .active {
+    .tab--active {
       border-bottom: 1px solid rgb(31, 231, 57);
     }
-    .task-tab {
+    .task-tab,
+    .finished-tab {
       @include cursorHover(pointer);
     }
   }
@@ -154,7 +155,7 @@ $todoAppTextColor: #616473;
       label {
         font-size: 2rem;
       }
-      input[type="text"] {
+      input[type='text'] {
         margin: 1rem 0;
         height: 5rem;
         border-radius: 0.5rem;
@@ -209,7 +210,7 @@ $todoAppTextColor: #616473;
     @include alignMainAndMinorAxis(space-between, center);
     padding: 1rem 0;
     margin: 1rem 0;
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       accent-color: #94ffd8;
       // background-color: white;
       @include setWidthAndHeightToElements(1.5rem, 1.5rem);
@@ -263,7 +264,7 @@ $iconSize: 28px;
     border: 1px solid #02a2f7;
     border-radius: 1rem;
   }
-  input[type="text"] {
+  input[type='text'] {
     padding: 0 {
       left: 0.5rem;
     }

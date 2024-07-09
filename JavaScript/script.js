@@ -7,8 +7,8 @@ const taskDetails = {
   incompleteTaskGroup: [],
   addCompleteTask() {
     this.completeTaskGroup.push({
-      taskID: this.taskID,
-      taskContent: this.taskContent,
+      getId: this.taskID,
+      getTaskContent: this.taskContent,
     });
 
     if (this.incompleteTaskGroup === null) return;
@@ -16,29 +16,25 @@ const taskDetails = {
   },
   addIncompleteTask() {
     this.incompleteTaskGroup.push({
-      taskID: this.taskID,
-      taskContent: this.taskContent,
+      getId: this.taskID,
+      getTaskContent: this.taskContent,
     });
   },
   getIndexOfTask(groupType = 'incompleteTaskGroup') {
     const [_, id] = this.taskID.split('-');
-    const idGroup = groupType.map(task => task.taskID);
+    const idGroup = groupType.map(task => task.getId);
     const index = idGroup.indexOf(id);
 
     return index;
-    // return this.incompleteTaskGroup.indexOf(this.taskID);
   },
   deleteTask(groupType) {
     const index = this.getIndexOfTask(groupType);
-    console.log(index);
     if (index > -1) groupType.splice(index, 1);
   },
   _isTaskExistInGroup(group) {
     return group.some(el => (this.taskID === el.taskID ? true : false));
   },
 };
-
-// console.log([1, 2, 3, 4, 5, 6].indexOf(4));
 
 class Task {
   #date = new Date();
@@ -103,6 +99,9 @@ const form = document.querySelector('.form');
 const inputField = document.querySelector('.input-field');
 
 const checkbox = document.querySelector('input[type = "checkbox"]');
+
+const taskTab = document.querySelector('.task-tab');
+const completeTaskTab = document.querySelector('.finished-tab');
 class ToDoApp {
   #date = new Date();
   constructor() {
@@ -127,6 +126,14 @@ class ToDoApp {
     this._addClickEventTargetAndCallBackFunction(
       taskGroup,
       this._renderCheckedTask.bind(this)
+    );
+    this._addClickEventTargetAndCallBackFunction(
+      taskTab,
+      this._renderIncompleteTaskGroup.bind(this)
+    );
+    this._addClickEventTargetAndCallBackFunction(
+      completeTaskTab,
+      this._renderCompleteTaskGroup.bind(this)
     );
   }
 
@@ -170,9 +177,29 @@ class ToDoApp {
     Element.value = '';
   }
 
+  _renderIncompleteTaskGroup() {
+    this._clear(taskGroup);
+    taskDetails.incompleteTaskGroup.forEach(task =>
+      this._renderTask(task, 'input')
+    );
+    this._removeActiveTab(completeTaskTab);
+    this._activeTab(taskTab);
+  }
+  _renderCompleteTaskGroup() {
+    this._clear(taskGroup);
+    taskDetails.completeTaskGroup.forEach(task =>
+      this._renderTask(task, 'checked')
+    );
+    this._removeActiveTab(taskTab);
+    this._activeTab(completeTaskTab);
+  }
+
+  _clear(container) {
+    container.innerHTML = '';
+  }
   _renderTask(task, type = 'input') {
     const markup = this._generateTaskMarkup(task, type);
-    taskGroup.insertAdjacentHTML('afterbegin', markup);
+    taskGroup.insertAdjacentHTML('beforeend', markup);
   }
 
   _generateTaskMarkup(task, type = 'input') {
@@ -195,12 +222,18 @@ class ToDoApp {
     </div>`;
     if (inputType === 'checked')
       return `
-    <div class="type--checked">
+    <div class="type--checked task-finished">
     <img src="./assets/Icons/checked.png" alt="" />
     </div>
     `;
   }
 
+  _activeTab(tab) {
+    tab.classList.add('tab--active');
+  }
+  _removeActiveTab(tab) {
+    tab.classList.remove('tab--active');
+  }
   _renderCheckedTask(e) {
     const target = e.target;
     const taskID = target.closest('.task').id;
@@ -210,8 +243,8 @@ class ToDoApp {
     if (target.type === 'checkbox') {
       task.classList.toggle('task-checked');
       this._storeDataIdAndTaskContent(taskIdAndContentGroup, 'complete');
+      this._hideSelectedModel(task);
     }
-    // this._hideSelectedModel(task);
   }
   _isChecked() {
     return checkbox.checked;
@@ -232,9 +265,6 @@ class ToDoApp {
 
   _showSelectedModel(selector) {
     selector.style.display = 'auto';
-  }
-  _clear(container) {
-    container.innerHTML = '';
   }
 }
 
