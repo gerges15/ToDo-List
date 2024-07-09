@@ -2,6 +2,22 @@
 
 const taskDetails = {
   task: { taskID: null, taskContent: null },
+  completeTaskGroup: [],
+  incompleteTaskGroup: [],
+  addCompleteTask() {
+    this.completeTaskGroup.push(this.task);
+    this.deleteTask(this.completeTaskGroup);
+  },
+  addIncompleteTask() {
+    this.incompleteTaskGroup.push(this.task);
+  },
+  getIndexOfTask() {
+    return this.incompleteTaskGroup.indexOf(this.task);
+  },
+  deleteTask(groupType) {
+    const index = this.getIndexOfTask();
+    groupType.splice(index, 1);
+  },
 };
 
 class Task {
@@ -88,8 +104,9 @@ class ToDoApp {
       this._activeBtnCreate.bind(this)
     );
 
-    this._addClickEventTargetAndCallBackFunction(taskGroup, () =>
-      console.log('checked')
+    this._addClickEventTargetAndCallBackFunction(
+      taskGroup,
+      this._renderCheckedTask.bind(this)
     );
   }
 
@@ -142,10 +159,10 @@ class ToDoApp {
     const taskContent = task.getTaskContent;
     return `
     <div class="task" id="task-${taskID}">
-
-              <li>${taskContent}</li>
-              ${this._generateTaskInputTypeMarkup(type)}
-              
+    
+    <li>${taskContent}</li>
+    ${this._generateTaskInputTypeMarkup(type)}
+    
     </div>
     `;
   }
@@ -153,14 +170,25 @@ class ToDoApp {
   _generateTaskInputTypeMarkup(inputType = 'input') {
     if (inputType === 'input')
       return `<div class="type--input">
-                <input type="checkbox" name="task" value="1"" />
-              </div>`;
+    <input type="checkbox" name="task" value="1"" />
+    </div>`;
     if (inputType === 'checked')
       return `
-              <div class="type--checked">
-                <img src="./assets/Icons/checked.png" alt="" />
-                </div>
-                `;
+    <div class="type--checked">
+    <img src="./assets/Icons/checked.png" alt="" />
+    </div>
+    `;
+  }
+
+  _renderCheckedTask(e) {
+    const target = e.target;
+    const taskID = target.closest('.task').id;
+    const task = document.querySelector(`#${taskID}`);
+    if (target.type === 'checkbox') task.classList.toggle('task-checked');
+    // this._hideSelectedModel(task);
+  }
+  _isChecked() {
+    return checkbox.checked;
   }
 
   _hideSelectedModel(selector) {
