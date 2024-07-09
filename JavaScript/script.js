@@ -59,8 +59,10 @@ const task = document.querySelector(".task");
 const btnCreate = document.querySelector(".btn__create");
 const btnSave = document.querySelector(".btn__save");
 const form = document.querySelector(".form");
+const inputField = document.querySelector(".input-field");
 
 class ToDoApp {
+  #date = new Date();
   constructor() {
     this._addClickEventTargetAndCallBackFunction(
       btnCreate,
@@ -68,7 +70,16 @@ class ToDoApp {
     );
     this._addClickEventTargetAndCallBackFunction(
       btnCreate,
-      this._renderTaskCreationFiled.bind(this)
+      this._renderSelectedElement.bind(this, form)
+    );
+
+    this._addClickEventTargetAndCallBackFunction(
+      btnSave,
+      this._makeNewTask.bind(this)
+    );
+    this._addClickEventTargetAndCallBackFunction(
+      btnSave,
+      this._activeBtnCreate.bind(this)
     );
   }
 
@@ -83,5 +94,29 @@ class ToDoApp {
   _renderTaskCreationFiled() {
     form.classList.toggle("hide");
   }
+
+  _makeNewTask() {
+    const task = new IncompleteTask();
+    task._setTaskContent = inputField.value;
+    this._renderSelectedElement(form);
+    console.log(task.getTaskContent);
+    this._clearInputFieldValue(inputField);
+  }
+  _renderSelectedElement(selector) {
+    selector.classList.toggle("hide");
+  }
+
+  _clearInputFieldValue(Element) {
+    Element.value = "";
+  }
+
+  _hideSelectedModel(selector) {
+    selector.style.display = "none";
+  }
+
+  _showSelectedModel(selector) {
+    selector.style.display = "block";
+  }
 }
+
 const app = new ToDoApp();
