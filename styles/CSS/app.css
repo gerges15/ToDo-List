@@ -12,7 +12,7 @@ html {
 
 body {
   background-color: #f0efe9;
-  font-family: "open_sansregular";
+  font-family: 'open_sansregular';
 }
 
 .container {
@@ -24,7 +24,8 @@ body {
   height: 100vh;
 }
 
-.edit-btn, .todoApp .form .addingTask .btn__save {
+.edit-btn,
+.todoApp .form .addingTask .btn__save {
   margin-top: 1rem;
   border: none;
   background-color: white;
@@ -35,7 +36,8 @@ body {
   padding: 0.5rem;
   align-self: flex-end;
 }
-.edit-btn:hover, .todoApp .form .addingTask .btn__save:hover {
+.edit-btn:hover,
+.todoApp .form .addingTask .btn__save:hover {
   cursor: pointer;
 }
 
@@ -74,7 +76,7 @@ body {
   margin-bottom: 0.2rem;
 }
 .todoApp .todoApp__header .todoApp-day--number {
-  font-family: "open_sansbold";
+  font-family: 'open_sansbold';
   font-size: 5rem;
   margin: 0;
   margin-top: 2rem;
@@ -131,14 +133,14 @@ body {
 .todoApp .form .addingTask label {
   font-size: 2rem;
 }
-.todoApp .form .addingTask input[type=text] {
+.todoApp .form .addingTask input[type='text'] {
   margin: 1rem 0;
   height: 5rem;
   border-radius: 0.5rem;
   border: 1px solid #f0efe9;
   width: 100%;
 }
-.todoApp .form .addingTask input[type=text]:focus {
+.todoApp .form .addingTask input[type='text']:focus {
   border: 1px solid;
   border-image: linear-gradient(45deg, #02a2f7, #06d001) 45;
   outline: none;
@@ -179,17 +181,17 @@ body {
   padding: 1rem 0;
   margin: 1rem 0;
 }
-.todoApp__body .task input[type=checkbox] {
+.todoApp__body .task input[type='checkbox'] {
   accent-color: #94ffd8;
   width: 1.5rem;
   height: 1.5rem;
 }
-.todoApp__body .task input[type=checkbox]:hover {
+.todoApp__body .task input[type='checkbox']:hover {
   cursor: pointer;
 }
 .todoApp__body .task-checked {
   text-decoration: line-through;
-  font-family: "open_sanslight";
+  font-family: 'open_sanslight';
 }
 
 .hide {
@@ -220,7 +222,7 @@ body {
   border: 1px solid #02a2f7;
   border-radius: 1rem;
 }
-.task-edit input[type=text] {
+.task-edit input[type='text'] {
   padding: 0;
   padding-left: 0.5rem;
   outline: none;
@@ -228,7 +230,7 @@ body {
   border-radius: 3px;
   height: 100%;
 }
-.task-edit input[type=text]:focus {
+.task-edit input[type='text']:focus {
   outline: none;
 }
 

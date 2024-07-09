@@ -102,7 +102,11 @@ const inputField = document.querySelector('.input-field');
 const checkbox = document.querySelector('input[type = "checkbox"]');
 
 const taskTab = document.querySelector('.task-tab');
+
 const completeTaskTab = document.querySelector('.finished-tab');
+
+const taskContentLabel = document.querySelector('.task__Content');
+console.log(taskContentLabel);
 class ToDoApp {
   #date = new Date();
   constructor() {
@@ -137,6 +141,17 @@ class ToDoApp {
       completeTaskTab,
       this._renderCompleteTaskGroup.bind(this)
     );
+
+    this._addClickEventTargetAndCallBackFunction(
+      taskGroup,
+      this._renderModifyingTask.bind(this)
+    );
+
+    this._addClickEventTargetAndCallBackFunction(
+      container,
+      this._closeModel.bind(this)
+    );
+    // console.log(container);
   }
 
   _renderDate() {
@@ -221,7 +236,7 @@ class ToDoApp {
     return `
     <div class="task" id="task-${taskID}">
     
-    <li>${taskContent}</li>
+    <div class = "task__Content"><li>${taskContent}</li></div>
     ${this._generateTaskInputTypeMarkup(type)}
     
     </div>
@@ -230,13 +245,20 @@ class ToDoApp {
 
   _generateTaskInputTypeMarkup(inputType = 'input') {
     if (inputType === 'input')
-      return `<div class="type--input">
+      return `<div class="type type--input">
     <input type="checkbox" name="task" value="1"" />
     </div>`;
     if (inputType === 'checked')
       return `
-    <div class="type--checked task-finished">
+    <div class=" type type--checked task-finished">
     <img src="./assets/Icons/checked.png" alt="" />
+    </div>
+    `;
+    if (inputType === 'modify')
+      return `
+    <div class=" type type--modify task-edit">
+                <img id="delete" src="./assets/Icons/delete.png" alt="" />
+                <img id="edit" src="./assets/Icons/edit.png" alt="" />
     </div>
     `;
   }
@@ -278,6 +300,46 @@ class ToDoApp {
 
   _showSelectedModel(selector) {
     selector.style.display = 'auto';
+  }
+
+  _renderModifyingTask(e) {
+    const target = e.target;
+    const taskID = target.closest('.task').id;
+    const task = document.querySelector(`#${taskID}`);
+
+    if (target.type !== 'checkbox') {
+      document
+        .querySelectorAll('.type')
+        .forEach(type => (type.style.display = 'none'));
+      const markupModify = this._generateTaskInputTypeMarkup('modify');
+
+      const markupInput = this._generateTaskInputTypeMarkup('input');
+
+      task.insertAdjacentHTML('beforeend', markupModify);
+      const taskIdGroup = taskDetails.incompleteTaskGroup.map(
+        task => `task-${task.getId}`
+      );
+
+      taskIdGroup.forEach(id => {
+        if (id !== taskID)
+          document
+            .querySelector(`#${id}`)
+            .insertAdjacentHTML('beforeend', markupInput);
+      });
+    }
+  }
+
+  _closeModel(e) {
+    console.log(e.target);
+    const target = e.target;
+    const isContainerClass = target.classList.contains('container');
+    const isTodoAppClass = target.classList.contains('todoApp');
+    const isFormClass = target.classList.contains('form');
+    if (isContainerClass || isTodoAppClass) this._renderIncompleteTaskGroup();
+    if (isContainerClass || isFormClass) {
+      form.classList.add('hide');
+      this._activeBtnCreate();
+    }
   }
 }
 

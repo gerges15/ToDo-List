@@ -25,13 +25,17 @@
         <div class="todoApp__body">
           <ul class="task__list">
             <div class="task" id="task-1">
-              <li>Read an article</li>
+              <div class="task__Content">
+                <li>Read an article</li>
+              </div>
               <input type="checkbox" name="task" value="1" id="task-1" />
             </div>
 
             <div class="task task-checked" id="task-2">
-              <li>Read an article</li>
-              <div class="type--input">
+              <div class="task__Content">
+                <li>Read an article</li>
+              </div>
+              <div class="type type--input">
                 <input
                   checked
                   type="checkbox"
@@ -43,15 +47,19 @@
             </div>
 
             <div class="task task-finished" id="task-3">
-              <li>Read an article</li>
-              <div class="type--checked">
+              <div class="task__Content">
+                <li>Read an article</li>
+              </div>
+              <div class="type type--checked">
                 <img src="./assets/Icons/checked.png" alt="" />
               </div>
             </div>
 
-            <div class="task task-edit" id="task-3">
-              <li>Read an article</li>
-              <div class="type--modify">
+            <div class="task" id="task-3">
+              <div class="task__Content">
+                <li class="task__Content">Read an article</li>
+              </div>
+              <div class="type type--modify task-edit">
                 <img id="delete" src="./assets/Icons/delete.png" alt="" />
                 <img id="edit" src="./assets/Icons/edit.png" alt="" />
               </div>
@@ -59,7 +67,7 @@
 
             <div class="task task-edit task-edit--active" id="task-3">
               <li><input type="text" /></li>
-              <div class="type--modify">
+              <div class="typ type--modify">
                 <button class="edit-btn">save</button>
               </div>
             </div>
