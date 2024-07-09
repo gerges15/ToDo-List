@@ -10,29 +10,36 @@ const taskDetails = {
       taskID: this.taskID,
       taskContent: this.taskContent,
     });
-    // this.deleteTask(this.completeTaskGroup);
+
+    if (this.incompleteTaskGroup === null) return;
+    this.deleteTask(this.incompleteTaskGroup);
   },
   addIncompleteTask() {
-    this.incompleteTaskGroup.push(this.task);
+    this.incompleteTaskGroup.push({
+      taskID: this.taskID,
+      taskContent: this.taskContent,
+    });
   },
-  getIndexOfTask() {
-    return this.incompleteTaskGroup.indexOf(this.task);
+  getIndexOfTask(groupType = 'incompleteTaskGroup') {
+    const [_, id] = this.taskID.split('-');
+    const idGroup = groupType.map(task => task.taskID);
+    const index = idGroup.indexOf(id);
+
+    return index;
+    // return this.incompleteTaskGroup.indexOf(this.taskID);
   },
   deleteTask(groupType) {
-    const index = this.getIndexOfTask();
-    groupType.splice(index, 1);
+    const index = this.getIndexOfTask(groupType);
+    console.log(index);
+    if (index > -1) groupType.splice(index, 1);
+  },
+  _isTaskExistInGroup(group) {
+    return group.some(el => (this.taskID === el.taskID ? true : false));
   },
 };
 
-taskDetails.taskID = 2;
-console.log(taskDetails.completeTaskGroup);
-// taskDetails.completeTaskGroup.push(taskDetails.task);
-taskDetails.addCompleteTask();
-console.log((taskDetails.taskID = 3));
-taskDetails.addCompleteTask();
-// taskDetails.completeTaskGroup.push(taskDetails.task);
-console.log(taskDetails.completeTaskGroup);
-// console.log(taskDetails.task);
+// console.log([1, 2, 3, 4, 5, 6].indexOf(4));
+
 class Task {
   #date = new Date();
   #id = (Date.now() + '').slice(-10) + Math.floor(Math.random() * 5) + 1;
@@ -143,8 +150,9 @@ class ToDoApp {
     this._renderSelectedElementToggle(form);
     this._clearInputFieldValue(inputField);
     this._renderTask(task, 'input');
-    taskDetails.task.taskID = task.getId;
-    taskDetails.task.taskContent = task.getTaskContent;
+    taskDetails.taskID = task.getId;
+    taskDetails.taskContent = task.getTaskContent;
+    taskDetails.addIncompleteTask();
   }
 
   _makeNewTask() {
@@ -198,19 +206,26 @@ class ToDoApp {
     const taskID = target.closest('.task').id;
     const task = document.querySelector(`#${taskID}`);
     const taskContent = task.getElementsByTagName('li')[0].textContent;
-    if (target.type === 'checkbox') task.classList.toggle('task-checked');
-    this._storeDataIdAndTaskContent(taskID, taskContent);
+    const taskIdAndContentGroup = [taskID, taskContent];
+    if (target.type === 'checkbox') {
+      task.classList.toggle('task-checked');
+      this._storeDataIdAndTaskContent(taskIdAndContentGroup, 'complete');
+    }
     // this._hideSelectedModel(task);
   }
   _isChecked() {
     return checkbox.checked;
   }
-  _storeDataIdAndTaskContent(taskID, taskContent) {
-    taskDetails.task.taskID = taskID;
-    taskDetails.task.taskContent = taskContent;
+
+  _storeDataIdAndTaskContent(taskIdAndContentGroup, state = 'complete') {
+    taskDetails.taskID = taskIdAndContentGroup[0];
+    taskDetails.taskContent = taskIdAndContentGroup[1];
+    if (taskDetails._isTaskExistInGroup(taskDetails.completeTaskGroup)) return;
     taskDetails.addCompleteTask();
     console.log(taskDetails.completeTaskGroup);
+    console.log(taskDetails.incompleteTaskGroup);
   }
+
   _hideSelectedModel(selector) {
     selector.style.display = 'none';
   }
