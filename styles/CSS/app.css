@@ -1,0 +1,234 @@
+@import url(/styles/CSS/normalize.css);
+@import url(/styles/fonts/open-sans/stylesheet.css);
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #f0efe9;
+  font-family: "open_sansregular";
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 100vh;
+}
+
+.edit-btn, .todoApp .form .addingTask .btn__save {
+  margin-top: 1rem;
+  border: none;
+  background-color: white;
+  color: #06d001;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  align-self: flex-end;
+}
+.edit-btn:hover, .todoApp .form .addingTask .btn__save:hover {
+  cursor: pointer;
+}
+
+.todoApp {
+  font-size: 1.5rem;
+  width: 40rem;
+  height: 55rem;
+  position: relative;
+  margin: auto;
+  color: #616473;
+  background-color: white;
+  padding: 3rem 4rem;
+  box-shadow: 0 0 1px whitesmoke;
+}
+.todoApp .todoApp__header {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.todoApp .todoApp__header .todoApp-date {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.todoApp .todoApp__header .todoApp-month-year {
+  text-transform: uppercase;
+}
+.todoApp .todoApp__header .todoApp-month-year .month {
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  margin: 0;
+  margin-bottom: 0.2rem;
+}
+.todoApp .todoApp__header .todoApp-day--number {
+  font-family: "open_sansbold";
+  font-size: 5rem;
+  margin: 0;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-right: 1.5rem;
+}
+.todoApp .todoApp__header .todoApp-day--string {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+}
+.todoApp .todoApp__footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  position: absolute;
+  top: 93%;
+  text-transform: capitalize;
+}
+.todoApp .todoApp__footer .active {
+  border-bottom: 1px solid rgb(31, 231, 57);
+}
+.todoApp .todoApp__footer .task-tab:hover {
+  cursor: pointer;
+}
+.todoApp .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.todoApp .form .addingTask {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: 3rem;
+  background-color: white;
+  width: 95%;
+  height: 35%;
+}
+.todoApp .form .addingTask label {
+  font-size: 2rem;
+}
+.todoApp .form .addingTask input[type=text] {
+  margin: 1rem 0;
+  height: 5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #f0efe9;
+  width: 100%;
+}
+.todoApp .form .addingTask input[type=text]:focus {
+  border: 1px solid;
+  border-image: linear-gradient(45deg, #02a2f7, #06d001) 45;
+  outline: none;
+}
+.todoApp .form .addingTask ::placeholder {
+  padding-left: 1rem;
+}
+.btn {
+  border: none;
+  position: absolute;
+  top: 95.5%;
+  left: 44%;
+  z-index: 2;
+  background-color: rgba(240, 239, 233, 0);
+}
+.btn img {
+  width: 50px;
+  height: 50px;
+}
+.btn img:hover {
+  cursor: pointer;
+}
+.btn.btn--active {
+  transform: rotate(45deg);
+}
+
+.todoApp__body .task__list {
+  list-style: none;
+  padding: 0;
+  margin-top: 3rem;
+  font-size: 2.1rem;
+}
+.todoApp__body .task {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin: 1rem 0;
+}
+.todoApp__body .task input[type=checkbox] {
+  accent-color: #94ffd8;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.todoApp__body .task input[type=checkbox]:hover {
+  cursor: pointer;
+}
+.todoApp__body .task-checked {
+  text-decoration: line-through;
+  font-family: "open_sanslight";
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.task-finished img {
+  width: 28px;
+  height: 28px;
+}
+
+.task-edit img {
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  margin-left: 0.9rem;
+}
+.task-edit img:hover {
+  cursor: pointer;
+}
+
+.edit-btn {
+  margin: 0;
+  color: #0ebbda;
+}
+
+.task-edit.task-edit--active {
+  border: 1px solid #02a2f7;
+  border-radius: 1rem;
+}
+.task-edit input[type=text] {
+  padding: 0;
+  padding-left: 0.5rem;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  height: 100%;
+}
+.task-edit input[type=text]:focus {
+  outline: none;
+}
+
+/*# sourceMappingURL=app.css.map */
