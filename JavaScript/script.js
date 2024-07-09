@@ -1,12 +1,16 @@
 'use strict';
 
 const taskDetails = {
-  task: { taskID: null, taskContent: null },
+  taskID: null,
+  taskContent: null,
   completeTaskGroup: [],
   incompleteTaskGroup: [],
   addCompleteTask() {
-    this.completeTaskGroup.push(this.task);
-    this.deleteTask(this.completeTaskGroup);
+    this.completeTaskGroup.push({
+      taskID: this.taskID,
+      taskContent: this.taskContent,
+    });
+    // this.deleteTask(this.completeTaskGroup);
   },
   addIncompleteTask() {
     this.incompleteTaskGroup.push(this.task);
@@ -20,6 +24,15 @@ const taskDetails = {
   },
 };
 
+taskDetails.taskID = 2;
+console.log(taskDetails.completeTaskGroup);
+// taskDetails.completeTaskGroup.push(taskDetails.task);
+taskDetails.addCompleteTask();
+console.log((taskDetails.taskID = 3));
+taskDetails.addCompleteTask();
+// taskDetails.completeTaskGroup.push(taskDetails.task);
+console.log(taskDetails.completeTaskGroup);
+// console.log(taskDetails.task);
 class Task {
   #date = new Date();
   #id = (Date.now() + '').slice(-10) + Math.floor(Math.random() * 5) + 1;
@@ -184,13 +197,20 @@ class ToDoApp {
     const target = e.target;
     const taskID = target.closest('.task').id;
     const task = document.querySelector(`#${taskID}`);
+    const taskContent = task.getElementsByTagName('li')[0].textContent;
     if (target.type === 'checkbox') task.classList.toggle('task-checked');
+    this._storeDataIdAndTaskContent(taskID, taskContent);
     // this._hideSelectedModel(task);
   }
   _isChecked() {
     return checkbox.checked;
   }
-
+  _storeDataIdAndTaskContent(taskID, taskContent) {
+    taskDetails.task.taskID = taskID;
+    taskDetails.task.taskContent = taskContent;
+    taskDetails.addCompleteTask();
+    console.log(taskDetails.completeTaskGroup);
+  }
   _hideSelectedModel(selector) {
     selector.style.display = 'none';
   }
