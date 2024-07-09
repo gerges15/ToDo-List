@@ -1,4 +1,36 @@
-class Task {}
+class Task {
+  #date = new Date();
+  #id = (Date.now() + "").slice(-10);
+  #taskContent;
+  #taskState = "incomplete";
+  constructor() {}
+
+  get getDate() {
+    return this.#date;
+  }
+  get getId() {
+    return this.#id;
+  }
+  get getTaskContent() {
+    return this.#taskContent;
+  }
+  set _setTaskContent(content = "") {
+    this.#taskContent = content;
+  }
+
+  get getTaskStateCompleteOrIncomplete() {
+    return this.#taskState;
+  }
+  set _setTaskStateCompleteOrIncomplete(taskState) {
+    this.#taskState = taskState;
+  }
+}
+const task1 = new Task();
+console.log(task1.getDate.toDateString());
+console.log(task1.getId);
+task1._setTaskContent = "complete todoApp today";
+console.log(task1.getTaskContent);
+console.log(task1.getTaskStateCompleteOrIncomplete);
 
 class IncompleteTask extends Task {}
 
