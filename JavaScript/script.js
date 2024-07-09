@@ -24,7 +24,6 @@ const taskDetails = {
     const [_, id] = this.taskID.split('-');
     const idGroup = groupType.map(task => task.getId);
     const index = idGroup.indexOf(id);
-
     return index;
   },
   deleteTask(groupType) {
@@ -88,7 +87,6 @@ const toDoAppMonthAndYearContainer = document.querySelector(
   '.todoApp-month-year'
 );
 const month = document.querySelector('.month');
-console.log(month.textContent);
 const year = document.querySelector('.year');
 const toDoAppDayString = document.querySelector('.todoApp-day--string');
 const toDoAppBody = document.querySelector('.todoApp__body');
@@ -98,15 +96,11 @@ const btnCreate = document.querySelector('.btn__create');
 const btnSave = document.querySelector('.btn__save');
 const form = document.querySelector('.form');
 const inputField = document.querySelector('.input-field');
-
 const checkbox = document.querySelector('input[type = "checkbox"]');
-
 const taskTab = document.querySelector('.task-tab');
-
 const completeTaskTab = document.querySelector('.finished-tab');
+const deleteImg = document.querySelector('#delete');
 
-const taskContentLabel = document.querySelector('.task__Content');
-console.log(taskContentLabel);
 class ToDoApp {
   #date = new Date();
   constructor() {
@@ -151,7 +145,11 @@ class ToDoApp {
       container,
       this._closeModel.bind(this)
     );
-    // console.log(container);
+
+    this._addClickEventTargetAndCallBackFunction(
+      taskGroup,
+      this._deleteTask.bind(this)
+    );
   }
 
   _renderDate() {
@@ -330,7 +328,6 @@ class ToDoApp {
   }
 
   _closeModel(e) {
-    console.log(e.target);
     const target = e.target;
     const isContainerClass = target.classList.contains('container');
     const isTodoAppClass = target.classList.contains('todoApp');
@@ -339,6 +336,16 @@ class ToDoApp {
     if (isContainerClass || isFormClass) {
       form.classList.add('hide');
       btnCreate.classList.remove('btn--active');
+    }
+  }
+  _deleteTask(e) {
+    const target = e.target;
+    const taskID = target.closest('.task').id;
+    const task = document.querySelector(`#${taskID}`);
+    taskDetails.taskID = taskID;
+    if (target.id === 'delete') {
+      this._hideSelectedModel(task);
+      taskDetails.deleteTask(taskDetails.incompleteTaskGroup);
     }
   }
 }
