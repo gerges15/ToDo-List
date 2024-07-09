@@ -338,7 +338,7 @@ class ToDoApp {
     if (isContainerClass || isTodoAppClass) this._renderIncompleteTaskGroup();
     if (isContainerClass || isFormClass) {
       form.classList.add('hide');
-      this._activeBtnCreate();
+      btnCreate.classList.remove('btn--active');
     }
   }
 }

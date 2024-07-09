@@ -181,12 +181,15 @@ body {
   padding: 1rem 0;
   margin: 1rem 0;
 }
+.todoApp__body .task:hover {
+  cursor: pointer;
+}
 .todoApp__body .task input[type='checkbox'] {
   accent-color: #94ffd8;
   width: 1.5rem;
   height: 1.5rem;
 }
-.todoApp__body .task input[type='checkbox']:hover {
+.todoApp__body .task {
   cursor: pointer;
 }
 .todoApp__body .task-checked {

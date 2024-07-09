@@ -206,6 +206,7 @@ $todoAppTextColor: #616473;
 
   .task {
     // outline: dotted dodgerblue;
+    @include cursorHover(pointer);
     @include flex(row);
     @include alignMainAndMinorAxis(space-between, center);
     padding: 1rem 0;
@@ -214,10 +215,6 @@ $todoAppTextColor: #616473;
       accent-color: #94ffd8;
       // background-color: white;
       @include setWidthAndHeightToElements(1.5rem, 1.5rem);
-
-      &:hover {
-        cursor: pointer;
-      }
     }
   }
 
