@@ -1,5 +1,30 @@
 @import url(/styles/CSS/normalize.css);
-@import url(/styles/fonts/open-sans/stylesheet.css);
+/* @import url(/styles/fonts/open-sans/stylesheet.css); */
+
+@font-face {
+  font-family: 'open_sansbold';
+  src: url('../fonts/open-sans/opensans-bold-webfont.woff2') format('woff2'),
+    url('../fonts/open-sans/opensans-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'open_sanslight';
+  src: url('../fonts/open-sans/opensans-light-webfont.woff2') format('woff2'),
+    url('../fonts/open-sans/opensans-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'open_sansregular';
+  src: url('../fonts/open-sans/opensans-regular-webfont.woff2') format('woff2'),
+    url('../fonts/open-sans/opensans-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 *,
 *::after,
 *::before {
