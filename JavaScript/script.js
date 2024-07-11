@@ -152,6 +152,13 @@ class ToDoApp {
       taskGroup,
       this._deleteTask.bind(this)
     );
+    this._addClickEventTargetAndCallBackFunction(
+      taskGroup,
+      this._editTask.bind(this)
+    );
+    // this._addClickEventTargetAndCallBackFunction(btnEdit, function () {
+    //   console.log("Hi i'm btn save you clicked me just now");
+    // });
   }
 
   _renderDate() {
@@ -261,6 +268,15 @@ class ToDoApp {
                 <img id="edit" src="./assets/Icons/edit.png" alt="" />
     </div>
     `;
+    if (inputType === 'edit')
+      return `
+    <div class = 'flex'>
+      <li><input type="text" /></li>
+      <div class="typ type--modify">
+                  <button class="edit-btn">save</button>
+      </div>
+    </div>
+    `;
   }
 
   _activeTab(tab) {
@@ -316,8 +332,8 @@ class ToDoApp {
       const markupInput = this._generateTaskInputTypeMarkup('input');
 
       task.insertAdjacentHTML('beforeend', markupModify);
-      const taskIdGroup = taskDetails.incompleteTaskGroup.map(
-        task => `task-${task.getId}`
+      const taskIdGroup = taskDetails.getTaskGroupIDs(
+        taskDetails.incompleteTaskGroup
       );
 
       taskIdGroup.forEach(id => {
@@ -352,14 +368,60 @@ class ToDoApp {
   }
   _editTask(e) {
     const target = e.target;
+
     const taskID = target.closest('.task').id;
     const task = document.querySelector(`#${taskID}`);
     taskDetails.taskID = taskID;
     if (target.id === 'edit') {
-      this._renderTaskEditing();
+      this._renderTaskEditing(task);
+      console.log('you clicked me :D');
     }
   }
-  _renderTaskEditing() {}
+
+  _renderTaskEditing(task) {
+    const markupEdit = this._generateTaskInputTypeMarkup('edit');
+    const markupInput = this._generateTaskInputTypeMarkup('input');
+    const taskID = task.id;
+    const taskIdGroup = taskDetails.getTaskGroupIDs(
+      taskDetails.incompleteTaskGroup
+    );
+    document
+      .querySelectorAll('.type')
+      .forEach(type => (type.style.display = 'none'));
+    this._clear(task);
+    task.insertAdjacentHTML('beforeend', markupEdit);
+    task.classList.add('task-edit');
+    task.classList.add('task-edit--active');
+    taskIdGroup.forEach(id => {
+      if (id !== taskID)
+        document
+          .querySelector(`#${id}`)
+          .insertAdjacentHTML('beforeend', markupInput);
+    });
+    task.classList.add('flex');
+    task.style.padding = '0';
+    this._saveNewEditedTask(task);
+  }
+
+  _saveNewEditedTask(task) {
+    const taskIdGroup = taskDetails.getTaskGroupIDs(
+      taskDetails.incompleteTaskGroup
+    );
+    const index = taskIdGroup.indexOf(task.id);
+    let taskContent = taskDetails.incompleteTaskGroup[index].getTaskContent;
+    console.log(taskContent);
+    let inputVal = document.querySelector('input[type = text]');
+    inputVal.value += taskContent;
+    this.renderNewGroup(inputVal, index);
+  }
+
+  renderNewGroup(taskContent, index) {
+    const btnEdit = document.querySelector('.edit-btn');
+    btnEdit.addEventListener('click', () => {
+      taskDetails.incompleteTaskGroup[index].getTaskContent = taskContent.value;
+      this._renderIncompleteTaskGroup();
+    });
+  }
 }
 
 const app = new ToDoApp();

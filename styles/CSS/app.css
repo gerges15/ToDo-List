@@ -262,4 +262,9 @@ body {
   outline: none;
 }
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
 /*# sourceMappingURL=app.css.map */
