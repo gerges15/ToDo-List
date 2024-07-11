@@ -275,3 +275,9 @@ $iconSize: 28px;
     }
   }
 }
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
