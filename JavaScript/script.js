@@ -21,9 +21,8 @@ const taskDetails = {
     });
   },
   getIndexOfTask(groupType = 'incompleteTaskGroup') {
-    const [_, id] = this.taskID.split('-');
-    const idGroup = groupType.map(task => task.getId);
-    const index = idGroup.indexOf(id);
+    const idGroup = this.getTaskGroupIDs(groupType);
+    const index = idGroup.indexOf(this.taskID);
     return index;
   },
   deleteTask(groupType) {
@@ -32,6 +31,9 @@ const taskDetails = {
   },
   _isTaskExistInGroup(group) {
     return group.some(el => (this.taskID === el.taskID ? true : false));
+  },
+  getTaskGroupIDs(groupType) {
+    return groupType.map(task => `task-${task.getId}`);
   },
 };
 
@@ -348,6 +350,16 @@ class ToDoApp {
       taskDetails.deleteTask(taskDetails.incompleteTaskGroup);
     }
   }
+  _editTask(e) {
+    const target = e.target;
+    const taskID = target.closest('.task').id;
+    const task = document.querySelector(`#${taskID}`);
+    taskDetails.taskID = taskID;
+    if (target.id === 'edit') {
+      this._renderTaskEditing();
+    }
+  }
+  _renderTaskEditing() {}
 }
 
 const app = new ToDoApp();
